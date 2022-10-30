@@ -25,7 +25,7 @@ import json
 import sys
 from time import perf_counter, sleep
 
-class NLP_db():
+class NLPdb():
     
     def create(db, cur, table):
         try:       
@@ -112,7 +112,7 @@ class NLP_db():
         table = word_utf[0]
         table = table + '_words'
         
-        last = NLP_db.show(cur, table)
+        last = NLPdb.show(cur, table)
         last = last[-1]
         
         id_word = int(last[1])+1
@@ -131,7 +131,7 @@ class NLP_db():
     def update(db, cur, uword, upos):
         
         #find()
-        data = NLP_db.find(db, cur, uword)
+        data = NLPdb.find(db, cur, uword)
         print(data)
         if len(data) != 0:
             utf_uword = data[0][4]
@@ -415,9 +415,9 @@ def json2sql():
     
     for pismeno in abeceda:
         table_name = pismeno + "_words"
-        NLP_db.create(db, cur, table_name)
+        NLPdb.create(db, cur, table_name)
         
-    NLP_db.show_tables(cur)
+    NLPdb.show_tables(cur)
     
     if os.path.exists(jfile_plus):
         with open(jfile_plus, 'r', encoding='utf8') as f:
@@ -465,7 +465,7 @@ def json2sql():
                 i = 0
                 
             inject8 = [i, ui ,slovo, pos, 0, 0, 0, 0]
-            NLP_db.add(db, cur, table_name, inject8) #inject8 = (id_word, uid_word, word, pos, sentiment_score, weight, classification, unit)
+            NLPdb.add(db, cur, table_name, inject8) #inject8 = (id_word, uid_word, word, pos, sentiment_score, weight, classification, unit)
             i += 1
             ui += 1
             
@@ -547,7 +547,7 @@ def tags(db, cur, body_token):
     for gram in body_token:
         if len(gram) != 0:
             #print('slovo={} len={}'.format(gram, len(gram)))
-            ret = NLP_db.find(db, cur, gram)
+            ret = NLPdb.find(db, cur, gram)
             
             if len(ret) == 0 and gram.isnumeric():
                 #print('{} = ciiiiiislo to je'.format(int(gram)))
@@ -594,9 +594,9 @@ def run(lines_array, body):
     if '12662a4b78e19ac27361b005a6dbb3d7' == body:
         print('[+] Checking new lines...')
         for la in lines_array:
-            if len( NLP_db.find(db, cur, la[0]['assyName'].lower()) ) == 0:
+            if len( NLPdb.find(db, cur, la[0]['assyName'].lower()) ) == 0:
                 inject8 = [la[0]['assyName'].lower(), 1, 0, 0, 11, 0] 
-                NLP_db.add(db, cur, inject8) # add
+                NLPdb.add(db, cur, inject8) # add
     
     
     #statement_ai(lines_array, body_token)
@@ -604,27 +604,27 @@ def run(lines_array, body):
     body_token_tags = tags(db, cur, body_token)
     print(body_token_tags)
     
-    #NLP_db.show_tables(cur)
+    #NLPdb.show_tables(cur)
     
     
     slovo = 'cw'      # <<<
     pos = 1             # <<<
     classification = 0 # <<<
-    #NLP_db.update(db, cur, slovo, pos)
+    #NLPdb.update(db, cur, slovo, pos)
 
     inject8 = [slovo, pos, 0, 0, classification, 0] #<<<
-    #NLP_db.delete(db, cur, inject8)
-    #NLP_db.add(db, cur, inject8)
+    #NLPdb.delete(db, cur, inject8)
+    #NLPdb.add(db, cur, inject8)
     
     
-    #NLP_db.find(db, cur, slovo)
-    #NLP_db.find(db, cur, 'hovno')
-    #NLP_db.find(db, cur, '_')
-    #NLP_db.find(db, cur, '>')
-    #NLP_db.find(db, cur, 'a')
+    #NLPdb.find(db, cur, slovo)
+    #NLPdb.find(db, cur, 'hovno')
+    #NLPdb.find(db, cur, '_')
+    #NLPdb.find(db, cur, '>')
+    #NLPdb.find(db, cur, 'a')
     #json2sql()
     
-    #NLP_db.show(cur, 'b_words')
+    #NLPdb.show(cur, 'b_words')
     db.close()
     
     #print(body_token)
