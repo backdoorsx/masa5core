@@ -35,7 +35,8 @@ class NLPdb():
             db.commit()        
         except:
             print('[!] SQlite3 : Error create table !')
-            
+    
+    
     def show(cur, table):
         
         sql_cmd = 'SELECT rowid,* FROM ' + table
@@ -46,7 +47,8 @@ class NLPdb():
             print(i)
             
         return row
-            
+    
+    
     def show_tables(cur):
         
         #cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
@@ -54,7 +56,9 @@ class NLPdb():
         tables = cur.fetchall()
         
         for table in tables:
-            print(table)   
+            print(table)
+            
+    
     def delete(db,cur,inject8):
         
         #DELETE FROM CRICKETERS WHERE LAST_NAME = 'Sangakkara'
@@ -74,8 +78,6 @@ class NLPdb():
         
     
     def add(db, cur, inject8):
-        
-        
         
         word = inject8[0]
         word_utf = utf_word(word)
@@ -127,7 +129,8 @@ class NLPdb():
             db.commit()
         except sqlite3.IntegrityError:
             print('[SQL3]  UNIQUE constraint failed: EXIST {}'.format(word))
-        
+    
+    
     def update(db, cur, uword, upos):
         
         #find()
@@ -149,7 +152,8 @@ class NLPdb():
             print('[-] nlu: update fail - "{}" not in database.'.format(uword))
         
         pass
-        
+       
+    
     def find(db, cur, fword):
         row = []
         
@@ -180,8 +184,7 @@ class NLPdb():
                 
         return row
             
-        
-        
+              
 # ------------------------------------------------------------------------------------------------------------------------------------
 # Vykradanie webu kvoly KSSJ https://slovnik.aktuality.sk/pravopis/kratky-slovnik/ & https://slovnik.aktuality.sk/pravopis/?q=ahoj
 # Vytvory slovniky vo formate json
