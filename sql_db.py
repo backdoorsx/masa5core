@@ -165,7 +165,6 @@ def find_assy(cursor):
     return lines
 
 
-
 def find_stations(cursor, ID_assy):
 
     cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='_bench'")
@@ -219,8 +218,10 @@ def show_schema(cursor): #DEBUGING
     
     pass
 
+
 # ID_st=815 mic='XYZ30+11RFXY'
 def get_mic_plus_lcd(cursor, ID_st, mic): # DEBUGING
+    
     inject = "SELECT t1.StartTime, t1.NIP_code, t2.ID_measurement, t3.meas_name, t2.ValueStr, t1.ID FROM testing.dbo.process t1 WITH(NOLOCK) "
     inject +="LEFT JOIN testing.dbo.MeasTable t2 WITH(NOLOCK) ON t1.ID = t2.ID_process "
     inject +="LEFT JOIN testing.dbo._measurements t3 WITH(NOLOCK) ON t2.ID_measurement = t3.ID_measurement "
@@ -274,6 +275,7 @@ def get_top_measures_data(cursor, ID_st, measuresName, Top, PresentTime):
     # sorted by ID_measurement
     data = sorted(data, key=lambda x: x[4], reverse=False)
     return data
+
 
 def find_fails(cursor, array_id_process):
     
