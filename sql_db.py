@@ -253,7 +253,7 @@ def get_top_measures_data(cursor, ID_st, measuresName, Top, PresentTime):
     inject +="LEFT JOIN testing.dbo._measurements t3 WITH(NOLOCK) ON t2.ID_measurement = t3.ID_measurement "
     inject +="WHERE ID_bench={} ".format(int(ID_st))
     inject +="AND t1.StartTime > '{}' ".format(PresentTime)
-    #inject +="AND NOT t2.Value=None "
+    inject +="AND t2.Value != NULL " # niekedy t2.Value = None , NEPOUZIVAT IsNull(t2.value,0 )
     inject +="AND t2.ID_measurement IN ("
     inject +="SELECT ID_measurement FROM testing.dbo._measurements WITH(NOLOCK) WHERE meas_name in ("
     
@@ -312,6 +312,7 @@ def get_measures_data(cursor, only_pass, ID_st, measuresName, StartTime, StopTim
     inject +="WHERE ID_bench={} ".format(int(ID_st))
     inject +="AND t1.StartTime > '{}' ".format(StartTime)
     inject +="AND t1.StartTime < '{}' ".format(StopTime)
+    inject +="AND t2.Value != NULL " # niekedy t2.Value = None , NEPOUZIVAT IsNull(t2.value,0 )
     
     if only_pass == 'False' or only_pass == 'True':
         inject +="AND t2.result='{}' ".format(only_pass) # 'False'/'True'/''

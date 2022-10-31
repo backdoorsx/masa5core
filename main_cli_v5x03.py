@@ -1309,6 +1309,11 @@ def get_spc_data(cursor, only_pass, NAME_assy, NAME_station, ID_Station, Top, me
     for i in range(len(data)-1):
         
         if data[i][5] == data[i+1][5]: # ak nazov je roznaky z nasledujucim, ID merania je na [4]
+            print(data[i][6])
+            if data[i][6] == None:
+                print(data[i][6])
+                print(data[i])
+                input('BUG >')
             
             #if data[i][3] == True or only_pass == 1: # only pass
             value.append(data[i][6])
@@ -1717,8 +1722,6 @@ def spc(assy, station, mdata):
     #else:
     #    up_down += '0'
         
-    
-    
     # VYTVOR STRING z nameranych dat z postupnostou 0 alebo 1
     for m in range(len(reverse_mdata)-1):
         if reverse_mdata[m+1] > reverse_mdata[m]:
@@ -2515,7 +2518,7 @@ if __name__ == "__main__":
     print('[*] Curret working directory {}'.format(current_path))
     
     # ----- MAIN SETTINGS
-    amount_of_data = 50         # pocet dat pre spc
+    amount_of_data = 150         # pocet dat pre spc
     uptime = int(2*60)          # in second
     time_for_report = '06:00'   # run_ftq_and_fails() datetime.datetime.now().hour == 6 and datetime.datetime.now().minute == 0 and datetime.datetime.now().day != prev_day
     
