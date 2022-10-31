@@ -2506,7 +2506,7 @@ if __name__ == "__main__":
     mpl.use('Agg')
     
     # ----- SCREEN
-    version = "Statistical Process Control core v5.0x16"
+    version = "Statistical Process Control core v5.0x17"
     screen(version)
     
     
@@ -2526,10 +2526,10 @@ if __name__ == "__main__":
     #print('    Week = {}'.format(week))
     
     #w, StartTime, StopTime = week_last(1)   # uloz predchadajuci week
-    #w, StartTime, StopTime = week_last(0)   # uloz aktualny week
+    w, StartTime, StopTime = week_last(0)   # uloz aktualny week
     #StartTime='2022-04-26 13:33'
     #StopTime='2022-04-26 23:59'
-    #print('    week {} first_day {} - last_day {}'.format(w, StartTime, StopTime))   
+    print('    week {} first_day {} - last_day {}'.format(w, StartTime, StopTime))   
     
     # ----- CHECK ADDRESS FILE
     jfile = current_path + '\\address.json'
