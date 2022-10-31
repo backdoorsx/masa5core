@@ -1309,11 +1309,6 @@ def get_spc_data(cursor, only_pass, NAME_assy, NAME_station, ID_Station, Top, me
     for i in range(len(data)-1):
         
         if data[i][5] == data[i+1][5]: # ak nazov je roznaky z nasledujucim, ID merania je na [4]
-            print(data[i][6])
-            if data[i][6] == None:
-                print(data[i][6])
-                print(data[i])
-                input('BUG >')
             
             #if data[i][3] == True or only_pass == 1: # only pass
             value.append(data[i][6])
